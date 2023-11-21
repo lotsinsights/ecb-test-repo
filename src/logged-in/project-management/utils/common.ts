@@ -397,3 +397,13 @@ export const currency = [
     "NZD",
     "YEN",
 ]
+
+
+export function cannotEditCompanyScored(role: string): boolean {
+    if (role === "Board") {
+        return true;
+    }
+    else {
+        return false;
+    }
+}

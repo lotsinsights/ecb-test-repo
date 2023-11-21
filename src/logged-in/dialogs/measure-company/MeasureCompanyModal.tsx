@@ -3,10 +3,16 @@ import React, { FormEvent, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAppContext } from "../../../shared/functions/Context";
 import { hideModalFromId } from "../../../shared/functions/ModalShow";
-import { defaultMeasureCompany, IMeasureCompany } from "../../../shared/models/MeasureCompany";
+import {
+  defaultMeasureCompany,
+  IMeasureCompany,
+} from "../../../shared/models/MeasureCompany";
 import { IObjective } from "../../../shared/models/Objective";
 import MODAL_NAMES from "../ModalName";
-import MeasureCompanyForm, { MeasureCompanyCommentsForm } from "./MeasureCompanyForm";
+import MeasureCompanyForm, {
+  MeasureCompanyCommentsForm,
+} from "./MeasureCompanyForm";
+import { cannotEditCompanyScored } from "../../project-management/utils/common";
 
 interface ITabsProps {
   tab: "Metrics" | "Comments";
@@ -41,10 +47,12 @@ const Tabs = (props: ITabsProps) => {
 const MeasureCompanyModal = observer(() => {
   const { api, store, ui } = useAppContext();
   const { objectiveId } = useParams();
-
+  const me = store.auth.meJson;
   const [objective, setObjective] = useState<IObjective | null>(null);
   const [tab, setTab] = useState<"Metrics" | "Comments">("Metrics");
-  const [measure, setMeasure] = useState<IMeasureCompany>({ ...defaultMeasureCompany, });
+  const [measure, setMeasure] = useState<IMeasureCompany>({
+    ...defaultMeasureCompany,
+  });
   const [loading, setLoading] = useState(false);
   // const [isLocked, setisLocked] = useState(true);
 
@@ -137,7 +145,9 @@ const MeasureCompanyModal = observer(() => {
   // Get measures
   useEffect(() => {
     const getObjective = () => {
-      const objective = store.companyObjective.all.find((objective) => objective.asJson.id === objectiveId);
+      const objective = store.companyObjective.all.find(
+        (objective) => objective.asJson.id === objectiveId
+      );
       if (objective) {
         store.companyObjective.select(objective.asJson);
         setObjective(objective.asJson);
@@ -149,7 +159,6 @@ const MeasureCompanyModal = observer(() => {
 
     getObjective();
   }, [store.companyObjective, objectiveId]);
-
 
   return (
     <div className="measure-modal uk-modal-dialog uk-modal-body uk-margin-auto-vertical uk-width-3-4">
@@ -186,15 +195,23 @@ const MeasureCompanyModal = observer(() => {
               type="button"
               onClick={onCancel}
             >
-              Cancel
+              {cannotEditCompanyScored(me?.role || "") ? (
+                <span>Close</span>
+              ) : (
+                <span>Cancel</span>
+              )}
             </button>
-            <button
-              className="btn btn-primary"
-              type="submit"
-              disabled={loading}
-            >
-              Save {loading && <div data-uk-spinner="ratio: .5"></div>}
-            </button>
+            {cannotEditCompanyScored(me?.role || "") ? (
+              <></>
+            ) : (
+              <button
+                className="btn btn-primary"
+                type="submit"
+                disabled={loading}
+              >
+                Save {loading && <div data-uk-spinner="ratio: .5"></div>}
+              </button>
+            )}
           </div>
         </form>
       </div>
@@ -204,18 +221,17 @@ const MeasureCompanyModal = observer(() => {
 
 export default MeasureCompanyModal;
 
-
-  // Active(Current) scorecard
-  // useEffect(() => {
-  //   const scorecard = store.scorecard.active;
-  //   if (scorecard) setisLocked(scorecard.locked);
-  // }, [store.scorecard.active]);
-    // const update = async (measure: IMeasureCompany) => {
-  //   try {
-  //     if (isLocked)
-  //       await api.companyMeasure.update(measure, ["annualActual", "rating", "q4rating"]);
-  //     else await api.companyMeasure.update(measure);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+// Active(Current) scorecard
+// useEffect(() => {
+//   const scorecard = store.scorecard.active;
+//   if (scorecard) setisLocked(scorecard.locked);
+// }, [store.scorecard.active]);
+// const update = async (measure: IMeasureCompany) => {
+//   try {
+//     if (isLocked)
+//       await api.companyMeasure.update(measure, ["annualActual", "rating", "q4rating"]);
+//     else await api.companyMeasure.update(measure);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };

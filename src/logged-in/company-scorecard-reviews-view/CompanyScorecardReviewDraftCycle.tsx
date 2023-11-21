@@ -1,11 +1,18 @@
-import { faFilePdf, faFileExcel, faCommentDots, } from "@fortawesome/free-solid-svg-icons";
+import {
+  faFilePdf,
+  faFileExcel,
+  faCommentDots,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { observer } from "mobx-react-lite";
 import { useMemo, useState } from "react";
 import Dropdown from "../../shared/components/dropdown/Dropdown";
 import ErrorBoundary from "../../shared/components/error-boundary/ErrorBoundary";
 import showModalFromId from "../../shared/functions/ModalShow";
-import { ALL_TAB, fullPerspectiveName } from "../../shared/interfaces/IPerspectiveTabs";
+import {
+  ALL_TAB,
+  fullPerspectiveName,
+} from "../../shared/interfaces/IPerspectiveTabs";
 import MODAL_NAMES from "../dialogs/ModalName";
 import Tabs from "../shared/components/tabs/Tabs";
 import Toolbar from "../shared/components/toolbar/Toolbar";
@@ -16,13 +23,16 @@ import EmptyError from "../admin-settings/EmptyError";
 import NoMeasures from "./NoMeasures";
 import { IScorecardMetadata } from "../../shared/models/ScorecardMetadata";
 import { sortByPerspective } from "../shared/utils/utils";
-import ObjectiveCompany, { IObjectiveCompany } from "../../shared/models/ObjectiveCompany";
+import ObjectiveCompany, {
+  IObjectiveCompany,
+} from "../../shared/models/ObjectiveCompany";
 import NoPerformanceData from "./NoPerformanceData";
 import Modal from "../../shared/components/Modal";
 import CompanyScorecardDraftApprovalModal from "../dialogs/company-scorecard-draft-approval/CompanyScorecardDraftApprovalModal";
 import CompanyScorecardDraftRejectionModal from "../dialogs/company-scorecard-draft-rejection/CompanyScorecardDraftRejectionModal";
 import { useAppContext } from "../../shared/functions/Context";
 import ObjectiveCompanyDraftCommentModal from "../dialogs/objective-company/ObjectiveCompanyDraftCommentModal";
+import MeasureCompanyModal from "../dialogs/measure-company/MeasureCompanyModal";
 
 interface IMeasureTableItemProps {
   measure: MeasureCompany;
@@ -30,6 +40,7 @@ interface IMeasureTableItemProps {
 const MeasureTableItem = observer((props: IMeasureTableItemProps) => {
   const { store } = useAppContext();
   const measure = props.measure.asJson;
+  const me = store.auth.meJson;
 
   const dataType = measure.dataType;
   const dataSymbol = measure.dataSymbol || "";
@@ -39,8 +50,17 @@ const MeasureTableItem = observer((props: IMeasureTableItemProps) => {
     showModalFromId(MODAL_NAMES.EXECUTION.MEASURE_COMMENTS_COMPANY_MODAL);
   };
 
+  const onViewMesure = () => {
+    store.companyMeasure.select(measure);
+    showModalFromId(MODAL_NAMES.EXECUTION.COMPANY_MEASURE_MODAL);
+  };
+
   return (
-    <tr className="row">
+    <tr
+      className="row"
+      data-uk-tooltip="Double Click to view Measure"
+      onDoubleClick={onViewMesure}
+    >
       <td className="uk-width-expand@s kit-sticky-column no-whitespace">
         {measure.description}
         <span className="measure-sub-weight uk-margin-small-left">
@@ -158,13 +178,17 @@ const StrategicList = (props: IStrategicListProps) => {
 
   const handleComments = (objective: IObjectiveCompany) => {
     store.companyObjective.select(objective);
-    showModalFromId(MODAL_NAMES.EXECUTION.OBJECTIVE_COMPANY_DRAFT_COMMENT_MODAL);
+    showModalFromId(
+      MODAL_NAMES.EXECUTION.OBJECTIVE_COMPANY_DRAFT_COMMENT_MODAL
+    );
   };
 
   return (
     <div className="objective-table uk-margin">
       {objectives.map((objective) => (
-        <ObjectiveItem key={objective.asJson.id} objective={objective}
+        <ObjectiveItem
+          key={objective.asJson.id}
+          objective={objective}
           handleComments={() => handleComments(objective.asJson)}
         >
           <MeasureTable measures={objective.measures} />
@@ -184,11 +208,18 @@ interface IProps {
   handleExportExcel: () => Promise<void>;
 }
 const CompanyScorecardReviewDraftCycle = observer((props: IProps) => {
-  const { agreement, objectives, hasAccess, handleExportExcel, handleExportPDF } = props;
+  const {
+    agreement,
+    objectives,
+    hasAccess,
+    handleExportExcel,
+    handleExportPDF,
+  } = props;
 
   const [tab, setTab] = useState(ALL_TAB.id);
 
-  const isActive = useMemo(() => agreement.agreementDraft.status === "submitted",
+  const isActive = useMemo(
+    () => agreement.agreementDraft.status === "submitted",
     [agreement.agreementDraft.status]
   );
 
@@ -198,16 +229,18 @@ const CompanyScorecardReviewDraftCycle = observer((props: IProps) => {
 
   const filteredObjectivesByPerspective = useMemo(() => {
     const sorted = objectives.sort(sortByPerspective);
-    return tab === ALL_TAB.id ? sorted : sorted.filter((o) => o.asJson.perspective === tab);
+    return tab === ALL_TAB.id
+      ? sorted
+      : sorted.filter((o) => o.asJson.perspective === tab);
   }, [objectives, tab]);
 
   const handleApproval = () => {
     showModalFromId(MODAL_NAMES.EXECUTION.COMPANY_DRAFT_APPROVAL_MODAL);
-  }
+  };
 
   const handleRejection = () => {
     showModalFromId(MODAL_NAMES.EXECUTION.COMPANY_DRAFT_REJECTION_MODAL);
-  }
+  };
 
   if (
     agreement.agreementDraft.status === "pending" ||
@@ -231,7 +264,8 @@ const CompanyScorecardReviewDraftCycle = observer((props: IProps) => {
                   <div className="uk-inline">
                     <button
                       className="btn btn-primary"
-                      title="Submit your draft for aproval, View past scorecards, and Export to PDF." >
+                      title="Submit your draft for aproval, View past scorecards, and Export to PDF."
+                    >
                       More <span data-uk-icon="icon: more; ratio:.8"></span>
                     </button>
                     <Dropdown pos="bottom-right">
@@ -329,8 +363,15 @@ const CompanyScorecardReviewDraftCycle = observer((props: IProps) => {
         </Modal>
       </ErrorBoundary>
       <ErrorBoundary>
-        <Modal modalId={MODAL_NAMES.EXECUTION.OBJECTIVE_COMPANY_DRAFT_COMMENT_MODAL}>
+        <Modal
+          modalId={MODAL_NAMES.EXECUTION.OBJECTIVE_COMPANY_DRAFT_COMMENT_MODAL}
+        >
           <ObjectiveCompanyDraftCommentModal />
+        </Modal>
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <Modal modalId={MODAL_NAMES.EXECUTION.COMPANY_MEASURE_MODAL}>
+          <MeasureCompanyModal />
         </Modal>
       </ErrorBoundary>
     </ErrorBoundary>

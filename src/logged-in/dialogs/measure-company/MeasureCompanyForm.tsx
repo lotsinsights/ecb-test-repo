@@ -2,10 +2,16 @@ import { Dispatch, SetStateAction } from "react";
 import { observer } from "mobx-react-lite";
 import { IMeasureCompany } from "../../../shared/models/MeasureCompany";
 import ErrorBoundary from "../../../shared/components/error-boundary/ErrorBoundary";
-import SelectInput, { SelectInputOption } from "../../shared/components/select-input/SelectInput";
+import SelectInput, {
+  SelectInputOption,
+} from "../../shared/components/select-input/SelectInput";
 import { dateFormat_YY_MM_DY } from "../../shared/utils/utils";
-import NumberInput, { NumberInputValue } from "../../shared/components/number-input/NumberInput";
+import NumberInput, {
+  NumberInputValue,
+} from "../../shared/components/number-input/NumberInput";
 import FormFieldInfo from "../../shared/components/form-field-info/FormFieldInfo";
+import { cannotEditCompanyScored } from "../../project-management/utils/common";
+import { useAppContext } from "../../../shared/functions/Context";
 
 interface IProps {
   measure: IMeasureCompany;
@@ -14,6 +20,8 @@ interface IProps {
 
 export const MeasureCompanyCommentsForm = (props: IProps) => {
   const { measure, setMeasure } = props;
+  const { store } = useAppContext();
+  const me = store.auth.meJson;
 
   return (
     <div className="uk-width-1-1">
@@ -41,6 +49,8 @@ const MeasureCompanyForm = observer((props: IProps) => {
   const { measure, setMeasure } = props;
   const dataType = measure.dataType;
   const dataSymbol = measure.dataSymbol;
+  const { store } = useAppContext();
+  const me = store.auth.meJson;
 
   const dateCss = {
     fontSize: "0.7em",
