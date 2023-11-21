@@ -1,4 +1,6 @@
-export const mailApiEndpoint = "http://ecb.unicomms.app/mail/mail.php?";
+export const mailApiEndpoint =
+  process.env.REACT_APP_MAIL_API_ENDPOINT ||
+"http://ecb.unicomms.app/mail/mail.php?";
 
 export const mailerConfig = {
   transport: {
@@ -14,4 +16,3 @@ export const mailerConfig = {
     from: { name: 'E Performance', address: 'e-performance@ecb.org.na' },
   },
 }
-

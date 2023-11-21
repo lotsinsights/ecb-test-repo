@@ -1,4 +1,4 @@
-import { faBullseye, faChartSimple, faChessBoard, faCommentDots, faDatabase, faHomeAlt, faShield } from "@fortawesome/free-solid-svg-icons";
+import { faBullseye, faChartSimple, faChessBoard, faDatabase, faHomeAlt, faShield, faTrophy } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { observer } from "mobx-react-lite";
 import { NavLink } from "react-router-dom";
@@ -86,32 +86,32 @@ const HR_USER_DRAWER = () => {
         <li className="list-item uk-parent">
           <NavLink to={"statistics"} className="navlink">
             <FontAwesomeIcon
-              icon={faCommentDots}
+              icon={faTrophy}
               size="2x"
               className="icon"
             />
-            Feedback
+            Recognition
             <div className="triangle"></div>
           </NavLink>
           <ul className="uk-nav-sub">
             <li>
               <NavLink to={"feedback/home"} className="navlink">
-                Feedback Home
+                Recognition Home
               </NavLink>
             </li>
             <li>
               <NavLink to={"feedback/give"} className="navlink">
-                Give Feedback
+                Give Recognition
               </NavLink>
             </li>
             <li>
               <NavLink to={"feedback/request"} className="navlink">
-                Request Feedback
+                Request Recognition
               </NavLink>
             </li>
             <li>
               <NavLink to={"feedback/history"} className="navlink">
-                Feedback History
+                Recognition History
               </NavLink>
             </li>
           </ul>
@@ -280,32 +280,32 @@ const EXECUTIVE_USER_DRAWER = () => {
         <li className="list-item uk-parent">
           <NavLink to={"statistics"} className="navlink">
             <FontAwesomeIcon
-              icon={faCommentDots}
+              icon={faTrophy}
               size="2x"
               className="icon"
             />
-            Feedback
+            Recognition
             <div className="triangle"></div>
           </NavLink>
           <ul className="uk-nav-sub">
             <li>
               <NavLink to={"feedback/home"} className="navlink">
-                Feedback Home
+                Recognition Home
               </NavLink>
             </li>
             <li>
               <NavLink to={"feedback/give"} className="navlink">
-                Give Feedback
+                Give Recognition
               </NavLink>
             </li>
             <li>
               <NavLink to={"feedback/request"} className="navlink">
-                Request Feedback
+                Request Recognition
               </NavLink>
             </li>
             <li>
               <NavLink to={"feedback/history"} className="navlink">
-                Feedback History
+                Recognition History
               </NavLink>
             </li>
           </ul>
@@ -463,32 +463,32 @@ const GENERAL_MANAGER_USER_DRAWER = () => {
         <li className="list-item uk-parent">
           <NavLink to={"statistics"} className="navlink">
             <FontAwesomeIcon
-              icon={faCommentDots}
+              icon={faTrophy}
               size="2x"
               className="icon"
             />
-            Feedback
+            Recognition
             <div className="triangle"></div>
           </NavLink>
           <ul className="uk-nav-sub">
             <li>
               <NavLink to={"feedback/home"} className="navlink">
-                Feedback Home
+                Recognition Home
               </NavLink>
             </li>
             <li>
               <NavLink to={"feedback/give"} className="navlink">
-                Give Feedback
+                Give Recognition
               </NavLink>
             </li>
             <li>
               <NavLink to={"feedback/request"} className="navlink">
-                Request Feedback
+                Request Recognition
               </NavLink>
             </li>
             <li>
               <NavLink to={"feedback/history"} className="navlink">
-                Feedback History
+                Recognition History
               </NavLink>
             </li>
           </ul>
@@ -646,32 +646,32 @@ const MANAGER_USER_DRAWER = () => {
         <li className="list-item uk-parent">
           <NavLink to={"statistics"} className="navlink">
             <FontAwesomeIcon
-              icon={faCommentDots}
+              icon={faTrophy}
               size="2x"
               className="icon"
             />
-            Feedback
+            Recognition
             <div className="triangle"></div>
           </NavLink>
           <ul className="uk-nav-sub">
             <li>
               <NavLink to={"feedback/home"} className="navlink">
-                Feedback Home
+                Recognition Home
               </NavLink>
             </li>
             <li>
               <NavLink to={"feedback/give"} className="navlink">
-                Give Feedback
+                Give Recognition
               </NavLink>
             </li>
             <li>
               <NavLink to={"feedback/request"} className="navlink">
-                Request Feedback
+                Request Recognition
               </NavLink>
             </li>
             <li>
               <NavLink to={"feedback/history"} className="navlink">
-                Feedback History
+                Recognition History
               </NavLink>
             </li>
           </ul>
@@ -833,32 +833,32 @@ const ADMIN_USER_DRAWER = () => {
         <li className="list-item uk-parent">
           <NavLink to={"statistics"} className="navlink">
             <FontAwesomeIcon
-              icon={faCommentDots}
+              icon={faTrophy}
               size="2x"
               className="icon"
             />
-            Feedback
+            Recognition
             <div className="triangle"></div>
           </NavLink>
           <ul className="uk-nav-sub">
             <li>
               <NavLink to={"feedback/home"} className="navlink">
-                Feedback Home
+                Recognition Home
               </NavLink>
             </li>
             <li>
               <NavLink to={"feedback/give"} className="navlink">
-                Give Feedback
+                Give Recognition
               </NavLink>
             </li>
             <li>
               <NavLink to={"feedback/request"} className="navlink">
-                Request Feedback
+                Request Recognition
               </NavLink>
             </li>
             <li>
               <NavLink to={"feedback/history"} className="navlink">
-                Feedback History
+                Recognition History
               </NavLink>
             </li>
           </ul>
@@ -1017,32 +1017,32 @@ const EMPLOYEE_USER_DRAWER = () => {
         <li className="list-item uk-parent">
           <NavLink to={"statistics"} className="navlink">
             <FontAwesomeIcon
-              icon={faCommentDots}
+              icon={faTrophy}
               size="2x"
               className="icon"
             />
-            Feedback
+            Recognition
             <div className="triangle"></div>
           </NavLink>
           <ul className="uk-nav-sub">
             <li>
               <NavLink to={"feedback/home"} className="navlink">
-                Feedback Home
+                Recognition Home
               </NavLink>
             </li>
             <li>
               <NavLink to={"feedback/give"} className="navlink">
-                Give Feedback
+                Give Recognition
               </NavLink>
             </li>
             <li>
               <NavLink to={"feedback/request"} className="navlink">
-                Request Feedback
+                Request Recognition
               </NavLink>
             </li>
             <li>
               <NavLink to={"feedback/history"} className="navlink">
-                Feedback History
+                Recognition History
               </NavLink>
             </li>
           </ul>
@@ -1285,32 +1285,32 @@ const BOARD_MEMBER_USER_DRAWER = () => {
         <li className="list-item uk-parent">
           <NavLink to={"statistics"} className="navlink">
             <FontAwesomeIcon
-              icon={faCommentDots}
+              icon={faTrophy}
               size="2x"
               className="icon"
             />
-            Feedback
+            Recognition
             <div className="triangle"></div>
           </NavLink>
           <ul className="uk-nav-sub">
             <li>
               <NavLink to={"feedback/home"} className="navlink">
-                Feedback Home
+                Recognition Home
               </NavLink>
             </li>
             <li>
               <NavLink to={"feedback/give"} className="navlink">
-                Give Feedback
+                Give Recognition
               </NavLink>
             </li>
             <li>
               <NavLink to={"feedback/request"} className="navlink">
-                Request Feedback
+                Request Recognition
               </NavLink>
             </li>
             <li>
               <NavLink to={"feedback/history"} className="navlink">
-                Feedback History
+                Recognition History
               </NavLink>
             </li>
           </ul>
